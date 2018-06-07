@@ -1,0 +1,11 @@
+>>database connection
+host: localhost
+username: hndecgs_user
+password: explore+88
+database: hndecgs_db
+
+
+>>ftp account
+host: ftp@100.cgsacollege.edu.bd	
+username : hndecgs
+password : w.6&~g,s!Igp

@@ -1,0 +1,1 @@
+localhost/event?status=notclicked&token=tfdse7hu0g0xizvgisx4ucy8wp3bdyqu
