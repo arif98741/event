@@ -10,12 +10,12 @@
 		if ($stmt) {
 			if ($stmt->num_rows > 0) {
 				$registant_data = $stmt->fetch_assoc();
-			} else{
-				header("location: index.php");
 			}
 			
 		} 
-	} 
+	} else{
+		header('location: index.php');
+	}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,7 @@
 			margin: 30px auto;
 			border: 1px solid black;
 			background: #fff;
-			height: 500px;
+			height: 550px;
 			border-radius: 2px;
 		}
 		.header{}
@@ -56,7 +56,7 @@
 		.main .details-table td, .main .details-table th{
 			border: 1px solid black;
 		}	
-		.main .details-table td{text-align: center;}
+		.main .details-table td{text-align: center; padding: 3px;}
 		.footer{}
 		table td{}
 
@@ -75,10 +75,25 @@
 				
 				<tbody>
 					<tr>
-						<td width="30%">Name</td>
+						<td width="30%">Registration ID</td>
+						<td width="5%">:</td>
+						<td width="40%"><?php  echo $registant_data['id']; ?></td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td width="30%">Full Name</td>
 						<td width="5%">:</td>
 						<td width="40%"><?php  echo $registant_data['fullname']; ?></td>
 						<td rowspan="12" width="25%"><img src="photo/<?php  echo $registant_data['photo']; ?>" alt="" width="170px" height="170px"></td>
+					
+					</tr>
+
+					<tr>
+						<td width="30%">Full Name in Bengali</td>
+						<td width="5%">:</td>
+						<td width="40%"><?php  echo $registant_data['fullnameinbangla']; ?></td>
+						
 					
 					</tr>
 
@@ -108,6 +123,16 @@
 						<td width="35%"><?php  echo $registant_data['batchyear']; ?></td>
 						
 					</tr>
+
+					</tr>
+
+						<td width="30%">Academic</td>
+						<td width="10%">:</td>
+						<td width="35%"><?php  echo $registant_data['academic']; ?></td>
+						
+					</tr>
+
+
 					<tr>
 						<td width="30%">Registraion Type</td>
 						<td width="10%">:</td>
@@ -118,8 +143,24 @@
 					<tr>
 						<td width="30%">Number of Family Member</td>
 						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['no_of_family_member']; ?></td>
+						<td width="35%">
+							<?php
+						  		if($registant_data['no_of_family_member'] == null || $registant_data['no_of_family_member'] == 0){
+						  			echo 0;
+						  		}else{
+						  			echo $registant_data['no_of_family_member'];
+						  		}
+						   ?>
+						  	
+						  </td>
 						
+					</tr>
+
+
+					<tr>
+						<td width="30%">Occupation</td>
+						<td width="10%">:</td>
+						<td width="35%"><?php  echo $registant_data['occupation']; ?></td>
 					</tr>
 
 					<tr>
@@ -128,18 +169,7 @@
 						<td width="35%"><?php  echo round($registant_data['amount']); ?>tk</td>
 					</tr>
 
-					<tr>
-						<td width="30%">Paid By</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo ucfirst($registant_data['method']); ?></td>
-					</tr>
-
-					<tr>
-						<td width="30%">Transaction ID</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['transaction_id']; ?></td>
-						
-					</tr>
+					
 
 					<tr>
 						<td width="30%">Registration Date</td>
@@ -152,7 +182,9 @@
 
 			</table>
 		</div>
-		<div class="footer"></div>
+		<div class="footer" style="margin-top: 30px; margin-left: 4px;">
+			<p style="text-align:center;">special note: This card must be saved and showed for collecting ID card,souvenir and gift.</p>
+		</div>
 	</div>
 </body>
 </html>

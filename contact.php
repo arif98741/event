@@ -16,6 +16,9 @@
 			<!-- /.box-header -->
 			<div style="background:#fff; padding:20px;box-shadow:0 1px 1px 0px #EFEFEF; class="table-container">
 				<h3 class="box-title" style="text-align: center;"><i class="fa fa-envelope" aria-hidden="true"></i> CONTACT<hr></h3>
+				<h4>Mobile: 01864-008787</h4>
+				<h4>Contact at <a href="https://facebook.com" target="_blank">Facebook</a></h4>
+				<hr>
 		 
 					<div class="row">
 					<form action="" method="post">	
@@ -51,7 +54,7 @@
 						
 						<div class="col-md-12">
 							<div class="form-group">
-								<textarea name="message" cols="45" rows="8" class="form-control" tabindex="4" placeholder="Write your message here" required=""></textarea>
+								<textarea name="message" cols="45" rows="5" class="form-control" tabindex="4" placeholder="Write your message here" required=""></textarea>
 							</div>
 						</div>
 								

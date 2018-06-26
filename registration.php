@@ -4,7 +4,7 @@
 	<div class="row">
 		
 		<?php
-			if (isset($_POST['sign_up'])){ ?>
+			if (isset($_POST['sign_up'])) { ?>
 				<div class="col-md-12" style="margin-bottom: 30px; width: 100%; margin-left: 30px;">
 				<?php 
 						$status = $man->addRegistant($_POST);
@@ -25,9 +25,8 @@
 								
 								<select class="form-control1"  name="registration_type" id="registration_type" required="">
 								    <option disabled="" selected="">Registration Type</option>
-								    <option value="Former Student">Ex Student</option>
-								    <option value="Former Student(Abroad)">Ex Student(Abroad)</option>
-								    <option value="Running Student">Current Student</option>
+								    <option value="Ex Student">Ex Student</option>
+								    <option value="Current Student">Current Student</option>
 							</select>
 						
 
@@ -36,18 +35,27 @@
 						<div class="col-md-4">
 							
 							<div class="form-group">
-								<input name="fullname" type="text" class="form-control1" placeholder="Full Name" />
+								<input name="fullname" type="text" class="form-control1" placeholder="Full Name in English" />
 							</div>
 						</div>
+
+						<div class="col-md-4">
+							
+							<div class="form-group">
+								<input name="fullnameinbangla" type="text" class="form-control1" placeholder="Full Name in Bangla" />
+							</div>
+						</div>
+
+
 						<div class="col-md-4">
 							<div class="form-group">
-								<input name="dob" type="text" class="form-control1" placeholder="Date of Birth (dd-mm-YYYY)" />
+								<input name="dob" type="text" class="form-control1" placeholder="Date of Birth (dd-mm-yyyy)" />
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 							  <select class="form-control1" name="gender" required="">
-								    <option disabled="" selected="">Select Gendar</option>
+								    <option disabled="" selected="">Select Gender</option>
 								    <option value="male">Male</option>
 								    <option value="female">Female</option>
 								  
@@ -56,7 +64,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<input name="father" type="text" class="form-control1"  placeholder="Father' Name"  />
+								<input name="father" type="text" class="form-control1"  placeholder="Father's Name"  />
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -68,6 +76,19 @@
 								<div class="form-group">
 									<input name="address" type="text" required class="form-control1" placeholder="Address" autocomplete="off" />
 								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<select class="form-control1" name="academic" required="">
+
+									    <option value="" disabled="" selected="">Academic</option>
+									    <option value="HSC">HSC</option>
+									    <option value="DEGREE">Degree(Pass) </option>
+									    <option value="Honors">Honours</option>
+									    <option value="Masters">Masters</option>
+										  
+									</select>
+								</div>
 							</div>							
 							
 												
@@ -77,7 +98,7 @@
 										<option value="" disabled="" selected="">First Admission Year</option>
 										<?php
 										 $year = 2018;
-										 while ($year >= 1950) {
+										 while ($year > 1943) {
 										     $year--; ?>
 											<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
 
@@ -88,19 +109,7 @@
 									
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<select class="form-control1" name="academic" required="">
-
-									    <option value="" disabled="" selected="">Academic</option>
-									    <option value="SSC">SSC</option>
-									    <option value="HSC">HSC</option>
-									    <option value="Honors">Honors</option>
-									    <option value="Masters">Masters</option>
-										  
-									</select>
-								</div>
-							</div>
+							
 							<div class="col-md-4">
 								<div class="form-group">
 									<input name="email" type="email" class="form-control1" id="email" placeholder="Email Address" />
@@ -116,35 +125,28 @@
 							
 							<div class="col-md-4">
 								<div class="form-group">
-									<input name="no_of_family_member" type="number" id="no_of_member_in_family" required class="form-control1" placeholder="Number of Members in Family" autocomplete="off" />
+									<input name="no_of_family_member" type="number" id="no_of_member_in_family"  class="form-control1" placeholder="Number of Members in Family" autocomplete="off" />
 								</div>
 							</div>
-							
-							<div class="col-md-6" tabindex="1" >
-							<div class="form-group">
-							  <select class="form-control1" name="method" required="">
-							    <option disabled="" selected="">Select Method</option>
-							    <option value="rocket">Rocket</option>
-							    <option value="cash">Cash</option>
-								  
-							</select>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<input name="bloodgroup" type="text" id="bloodgroup"  class="form-control1" placeholder="Blood Group" autocomplete="off" />
+								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
+
+						<div class="col-md-4">
 							<div class="form-group">
 								<input name="amount" type="number" id="amount" class="form-control1"   placeholder="Amount"  readonly="" />
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<input name="transaction_id" type="text" class="form-control1"   placeholder="Transaction ID"  required="" />
-							</div>
-						</div>
+						
 
-						<div class="col-md-6">
+						<div class="col-md-12">
+							<label for="">Photo</label>
 							<div class="form-group">
 								<input name="expiration" type="hidden" required class="form-control1"  autocomplete="off" value="<?php echo date('Y/m/d', strtotime('+15 days'));?>" />
-								<samp><input name="photo" type="file"  class="form-control1" id="f" onchange="ValidateSingleInput(this);" accept=".PNG" /></samp>
+								<samp><input name="photo" type="file"  class="form-control1" id="f" onchange="ValidateSingleInput(this);" accept=".PNG" required="" /></samp>
 							</div>
 						</div>
 								

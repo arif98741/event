@@ -24,6 +24,7 @@ class Manage {
        
         $registration_type = $this->helpObj->validAndEscape($data['registration_type']);
         $fullname = $this->helpObj->validAndEscape($data['fullname']);
+        $fullnameinbangla = $this->helpObj->validAndEscape($data['fullnameinbangla']);
         $dob = $this->helpObj->validAndEscape($data['dob']);
         $gender = $this->helpObj->validAndEscape($data['gender']);
         $father = $this->helpObj->validAndEscape($data['father']);
@@ -39,19 +40,16 @@ class Manage {
         $photo  =  'photo' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.jpg';
         $msg = '';
 
-        $checkstmt = $this->dbObj->link->query("SELECT * from registration where email ='$email' or contact='$contact'");
+        $checkstmt = $this->dbObj->link->query("SELECT * from registration where fullname='$fullname' and registration_type='$registration_type' and  contact='$contact'") or die($this->dbObj->link->error);
         if ($checkstmt) {
             $row = $checkstmt->num_rows;
             if($row > 0){
                 return "<col-md-12 width='100%'><span class='alert alert-warning'>You have already registered on <strong>Celebration 75 years - CGSA COLLEGE</strong>.</span></div>";
-            }else if($this->checkTransaction($data) == true)
-            {
-                return  "<col-md-12><span class='alert alert-warning'>Failed to pay. Transaction id was used before for <strong>Celebration 75 years - CGSA COLLEGE</strong></span></div>";
             }else{
                 $query = "insert into registration(registration_type,
-                fullname,dob,gender,father,contact,address,email,batchyear,academic,
+                fullname,fullnameinbangla,dob,gender,father,contact,address,email,batchyear,academic,
                 occupation,photo,no_of_family_member, date
-                ) values('$registration_type','$fullname','$dob','$gender','$father','$contact','$address','$email','$batchyear','$academic','$occupation','$photo','$no_of_family_member', '$date')";
+                ) values('$registration_type','$fullname','$fullnameinbangla','$dob','$gender','$father','$contact','$address','$email','$batchyear','$academic','$occupation','$photo','$no_of_family_member', '$date')";
 
                 $stmt = $this->dbObj->insert($query);
                 if ($stmt) {
@@ -62,19 +60,19 @@ class Manage {
                     if ($checkstmt) {
                         $registant_id = $checkstmt->fetch_object()->id;
                         $data['registant_id'] = $registant_id;
+                        $this->sendMessageConfirmation($fullname,$contact); //send sms confirmation
                         $status = $this->addPayment($data);
                     }
 
-                    $stmt = $this->dbObj->link->query("select id from registration order by id desc limit 1") or die($db->link->error)." at line number ".__LINE__;
+                    $stmt = $this->dbObj->link->query("select * from registration order by id desc limit 1") or die($db->link->error)." at line number ".__LINE__;
                     if ($stmt) {
                         $data = $stmt->fetch_assoc();
                         $id = $data['id'];
+                        $contact = $data['contact'];
+
                         header("location: confirmcard.php?action=preview&rid=".$id);
                         
                     }
-
-                    
-                     
                    
                 } else {
                     return "<span class='alert alert-warning'>Failed! Unknown Error. Please Contact Support</span>";
@@ -102,9 +100,9 @@ class Manage {
         $checkstmt = $this->dbObj->link->query($checkquery);
         if ($checkstmt) {
            
-            $query = "insert into ledger(registant_id,method,transaction_id,amount) 
-            values('$registant_id','$method','$transaction_id','$amount')";
-            $stmt = $this->dbObj->link->query($query);
+            $query = "insert into ledger(registant_id,amount) 
+            values('$registant_id','$amount')";
+            $stmt = $this->dbObj->link->query($query)  or die($db->link->error)." at line number ".__LINE__;;
             if ($stmt) {
                 return  true;
             }else{
@@ -123,10 +121,9 @@ class Manage {
 
     function checkTransaction($data)
     {
-        $method = $this->helpObj->validAndEscape($data['method']);
-        $transaction_id = $this->helpObj->validAndEscape($data['transaction_id']);
+       
 
-        $checkquery = "select * from ledger where  method='$method' and transaction_id='$transaction_id'";
+        /*$checkquery = "select * from ledger where  method='$method' and transaction_id='$transaction_id'";
         $checkstmt = $this->dbObj->link->query($checkquery);
         if ($checkstmt) {
             if ($checkstmt->num_rows > 0) {
@@ -134,7 +131,7 @@ class Manage {
             }else{
                 return false;
             }
-        }
+        }*/
     }
 
 
@@ -152,6 +149,33 @@ class Manage {
         }else{
             return false;
         }
+
+    }
+
+
+    /*
+    @ send confirmation sms to registants
+    @ 
+    */
+    function sendMessageConfirmation($fullname,$contact)
+    {
+
+        $message = "Dear ".$fullname.", your registration to '75 Years Celebration - CGSA College' has successfully completed. For details visit http://75.cgsacollege.edu.bd/";
+
+        $token = "77f9a4d2c5ea51913e1cd7624705239c";
+        $url = "http://sms.greenweb.com.bd/api.php";
+        
+        $data= array(
+        'to'=> $contact,
+        'message'=>$message,
+        'token'=>"$token"
+        ); // Add parameters in key value
+
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        echo $smsresult = curl_exec($ch); //execute statement to send sms
 
     }
 

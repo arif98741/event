@@ -22,8 +22,11 @@
 <!-- Full Width Column -->
 <div class="container">
 	<div class="row">
-		
-
+		<h1 class="text-center">Celebration of 75th Anniversary</h1>
+		<marquee behavior="" direction="">Registration Deadline - 30 September 2018</marquee>
+	</div>
+	<div class="row">
+	
 		
 		<div class="col-md-12">
 			
@@ -31,14 +34,14 @@
 		 
 				<div class="col-md-4 dashboard-block">
 					
-					<a href="<?php echo BASE_URL?>newsandevent.php"><i class="fa fa-bullhorn"></i>&nbsp;News and Events</a>
+					<a href="newsandevent.php"><i class="fa fa-bullhorn"></i>&nbsp;News and Events</a>
 					<hr>
 
 				</div>
 
 				<div class="col-md-4 dashboard-block">
 					
-					<a href="<?php echo BASE_URL?>rules.php"><i class="fa fa-list"></i>&nbsp;Rules</a>
+					<a href="rules.php"><i class="fa fa-list"></i>&nbsp;Rules</a>
 					<hr>
 
 
@@ -47,7 +50,7 @@
 
 				<div class="col-md-4 dashboard-block">
 					
-					<a href="<?php echo BASE_URL?>registration.php"><i class="fa fa-plus"></i>&nbsp;Registration</a>
+					<a href="registration.php"><i class="fa fa-plus"></i>&nbsp;Registration</a>
 					
 					<hr>
 					
