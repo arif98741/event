@@ -28,35 +28,36 @@
 			padding: 0;
 		}
 		body{
-			background: #156C7F;
+			background: #fff;
 			max-width: 970px;
 			margin: 0 auto;
 		}
 		.wrapper{
 			width: 960px;
 			margin: 30px auto;
-			border: 1px solid black;
+			border: 1px solid #eee;
 			background: #fff;
 			height: 550px;
-			border-radius: 2px;
+			border-radius: 3px;
 		}
 		.header{}
-		.header h1, .header h3{text-align: center; padding: 10px;}
+		.header h1, .header h3{text-align: center; padding: 0px; color:#006}
 		.main{
 
 		}
-		.main h4{text-align: center; margin-top: 20px;}
+				.header h1{  color:#F00;}
+		.main h4{text-align: center;  }
 		.main .details-table{
 			width: 95%;
 			 border: 1px solid black;
 			 margin: 0 auto;
-			 margin-top: 30px;
+			 margin-top: 20px;
 			 border-collapse: collapse;
 			}
 		.main .details-table td, .main .details-table th{
 			border: 1px solid black;
 		}	
-		.main .details-table td{text-align: center; padding: 3px;}
+		.main .details-table td{text-align: left; padding: 3px;}
 		.footer{}
 		table td{}
 
@@ -64,86 +65,116 @@
 </head>
 <body>
 	<div class="wrapper">
-		<div class="header">
-			<h1>CHOWMUHANI GOVT. SA COLLEGE</h1>
-			<H3>Chowmuhani, Noakhali</H3>
-		</div>
+	  <div class="header">
+		<table width="100%" border="0">
+			  <tr>
+			    <td width="15%" align="left" valign="top"><a href="index.php"><img src="photo/logo.jpg" width="85" height="93"  alt=""/></a></td>
+			    <td width="54%" nowrap="nowrap"><h1>CHOWMUHANI GOVT. SA COLLEGE</h1>
+                <H3>Chowmuhani, Noakhali</H3></td>
+			    <td width="15%" align="right" valign="top"><img src="photo/c_logo.png" width="120" height="89"  alt=""/></td>
+		      </tr>
+	    </table>
+	  </div>
 		<div class="main">
-			<h4>Congratulations! We have successfully received your registration.</h4>
-			<table class="details-table">
+		  <p style="max-width: 685px; margin: 0 auto;">Congratulations! We have successfully received your registration. Your Registration ID is  <strong><?php  echo $registant_data['id']; ?></strong>. Please pay the amount <strong>tk<?php echo $registant_data['amount']; ?></strong> by mobile banking system- Rocket for collecting you invitation card.<br><br></p>
+		  
+          <table width="100%" border="0">
+            <tr>
+              <td width="2%" nowrap>&nbsp;</td>
+              <td width="13%" nowrap><strong>Registration ID: </strong></td>
+              <td width="65%"><strong>
+                <?php  echo $registant_data['id']; ?>
+              </strong></td>
+              <td width="14%" nowrap><strong>Registration Date: </strong></td>
+              <td width="4%" nowrap><strong>
+                <?php  echo date('d-m-Y', strtotime($registant_data['date']));; ?>
+              </strong></td>
+              <td width="2%" nowrap>&nbsp;</td>
+            </tr>
+          </table>
+<table width="100%" class="details-table">
 				
-				
-				<tbody>
+	    <tbody>
 					<tr>
-						<td width="30%">Registration ID</td>
-						<td width="5%">:</td>
-						<td width="40%"><?php  echo $registant_data['id']; ?></td>
-						<td></td>
-					</tr>
-
-					<tr>
-						<td width="30%">Full Name</td>
-						<td width="5%">:</td>
-						<td width="40%"><?php  echo $registant_data['fullname']; ?></td>
-						<td rowspan="12" width="25%"><img src="photo/<?php  echo $registant_data['photo']; ?>" alt="" width="170px" height="170px"></td>
+						<td width="19%" align="left" nowrap>Full Name</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['fullname']; ?>
+						</strong></td>
+						<td width="20%" rowspan="11" align="center" valign="top"><img src="photo/<?php  echo $registant_data['photo']; ?>" alt="" width="170px" height="170px"></td>
 					
 					</tr>
 
 					<tr>
-						<td width="30%">Full Name in Bengali</td>
-						<td width="5%">:</td>
-						<td width="40%"><?php  echo $registant_data['fullnameinbangla']; ?></td>
+						<td width="19%" align="left" nowrap>Full Name in Bengali</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['fullnameinbangla']; ?>
+						</strong></td>
 						
 					
 					</tr>
 
 					<tr>
-						<td width="30%">Gender</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo strtoupper($registant_data['gender']); ?></td>
+						<td width="19%" align="left" nowrap>Gender</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo strtoupper($registant_data['gender']); ?>
+						</strong></td>
 						
 					</tr>
 
 					<tr>
-						<td width="30%">Contact Number</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['contact']; ?></td>
+						<td width="19%" align="left" nowrap>Contact Number</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['contact']; ?>
+						</strong></td>
 						
 					</tr>
 
 					<tr>
-						<td width="30%">Email</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['email']; ?></td>
+						<td width="19%" align="left" nowrap>Email</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['email']; ?>
+						</strong></td>
 						
 					</tr>
 
-						<td width="30%">First Admission</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['batchyear']; ?></td>
+			  <td width="19%" align="left" nowrap>First Admission</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['batchyear']; ?>
+						</strong></td>
 						
 					</tr>
 
-					</tr>
+					
 
-						<td width="30%">Academic</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['academic']; ?></td>
+						<td width="19%" align="left" nowrap>Academic</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['academic']; ?>
+						</strong></td>
 						
 					</tr>
 
 
 					<tr>
-						<td width="30%">Registraion Type</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['registration_type']; ?></td>
+						<td width="19%" align="left" nowrap>Registraion Type</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['registration_type']; ?>
+						</strong></td>
 						
 					</tr>
 
 					<tr>
-						<td width="30%">Number of Family Member</td>
-						<td width="10%">:</td>
-						<td width="35%">
+						<td width="19%" align="left" nowrap>Number of Family Member</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap>
+							<strong>
 							<?php
 						  		if($registant_data['no_of_family_member'] == null || $registant_data['no_of_family_member'] == 0){
 						  			echo 0;
@@ -152,38 +183,32 @@
 						  		}
 						   ?>
 						  	
-						  </td>
+					      </strong></td>
 						
 					</tr>
 
 
 					<tr>
-						<td width="30%">Occupation</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo $registant_data['occupation']; ?></td>
+						<td width="19%" align="left" nowrap>Occupation</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo $registant_data['occupation']; ?>
+						</strong></td>
 					</tr>
 
 					<tr>
-						<td width="30%">Total Fee</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo round($registant_data['amount']); ?>tk</td>
+						<td width="19%" align="left" nowrap>Total Fee</td>
+						<td width="5%" nowrap>:</td>
+						<td width="56%" align="left" nowrap><strong>
+					    <?php  echo round($registant_data['amount']); ?>
+					    /- Taka</strong></td>
 					</tr>
 
 					
-
-					<tr>
-						<td width="30%">Registration Date</td>
-						<td width="10%">:</td>
-						<td width="35%"><?php  echo date('d-m-Y', strtotime($registant_data['date']));; ?></td>
-					</tr>
-
-				</tbody>
-
-
 			</table>
 		</div>
 		<div class="footer" style="margin-top: 30px; margin-left: 4px;">
-			<p style="text-align:center;">special note: This card must be saved and showed for collecting ID card,souvenir and gift.</p>
+			<p style="text-align:center;">বিঃ দ্রঃ Registration ID ব্যবহার করে Rocket এর মাধ্যমে আপনার ফি পরিশোধ করুন । Registration ID ও টাকা পরিশোধ করার পর প্রাপ্ত  Transaction ID ব্যবহার করে Invitation Card সংগ্রহ করুন। Invitation Card ছাড়া কেউ অনুষ্ঠানস্থলে প্রবেশ করতে পারবে না। </p>
 		</div>
 	</div>
 </body>

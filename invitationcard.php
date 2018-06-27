@@ -3,14 +3,16 @@
 <div class="container">
 	<div class="row">
 		<?php if (isset($_POST['getinvitationcard'])){ 
+			$registration_id = $help->validAndEscape($_POST['registration_id']);
 			$transaction_id = $help->validAndEscape($_POST['transaction_id']);
-			$stmt = $db->link->query("select * from ledger where transaction_id ='$transaction_id'") or die($db->link->error)."at line number ".__LINE__;
+			
+			$stmt = $db->link->query("SELECT * FROM registration r JOIN ledger l on r.id = l.registant_id WHERE r.id = '$registration_id' and l.transaction_id='$transaction_id'") or die($db->link->error)."at line number ".__LINE__;
 			if ($stmt) {
 				if ($stmt->num_rows > 0) {
 					$data = $stmt->fetch_assoc();
 					header("location: getinvitationcard.php?action=getcard&registrationid=".$data['registant_id']);
 				} else {
-					$message = "<h3 style='color: red; text-align:center;'>No Transaction ID found. Try by another ID</h3>";
+					$message = "<h3 style='color: red; text-align:center;'>Registration ID or Transaction ID Didn't match</h3>";
 				}
 			}
 		} ?>	
@@ -31,7 +33,13 @@
 						
 						<div class="col-md-offset-3 col-md-6">
 							<div class="form-group">
+								<input name="registration_id" type="text" class="form-control1" tabindex="2"  placeholder="Registration ID"  required="" />
+
+								<br><br>
+
 								<input name="transaction_id" type="text" class="form-control1" tabindex="2"  placeholder="Transaction ID"  required="" />
+
+								
 							</div>
 						</div>
 					</div>

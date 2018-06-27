@@ -13,19 +13,22 @@
 				</div>
 			<?php	} ?>
 		
-		<div class="col-md-offset-1 col-md-10">
+		<div class="col-md-12">
 			<!-- /.box-header -->
-			<div style="background:#fff; padding:20px;box-shadow:0 1px 1px 0px #EFEFEF; class="table-container">
-				<h3 class="box-title"><i class="fa fa-user-plus" aria-hidden="true"></i> EVENT REGISTRATION<hr></h3>
+			<div style="background:#fff; padding:20px;box-shadow:0 1px 1px 0px #ccc; class="table-container">
+				<h3 class="box-title"><i class="fa fa-user-plus" aria-hidden="true"></i> 75th Anniversary | Student Registration Form</h3> 
+				<a href="rules.php">Befour Registration Please Read the following Instruction</a>
+<hr>
 		 
 					<div class="row">
 					<form action="" method="post"  enctype="multipart/form-data">	
 						<div class="col-md-4">
 							<div class="form-group">
 								
-								<select class="form-control1"  name="registration_type" id="registration_type" required="">
+								<select class="form-control1"  name="registration_type" id="registration_type" required>
 								    <option disabled="" selected="">Registration Type</option>
 								    <option value="Ex Student">Ex Student</option>
+								    <option value="Ex Student(Abroad)">Ex Student(Abroad)</option>
 								    <option value="Current Student">Current Student</option>
 							</select>
 						
@@ -54,7 +57,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-							  <select class="form-control1" name="gender" required="">
+							  <select class="form-control1" name="gender" required>
 								    <option disabled="" selected="">Select Gender</option>
 								    <option value="male">Male</option>
 								    <option value="female">Female</option>
@@ -79,7 +82,7 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<select class="form-control1" name="academic" required="">
+									<select class="form-control1" name="academic" required>
 
 									    <option value="" disabled="" selected="">Academic</option>
 									    <option value="HSC">HSC</option>
@@ -131,7 +134,21 @@
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<input name="bloodgroup" type="text" id="bloodgroup"  class="form-control1" placeholder="Blood Group" autocomplete="off" />
+									
+									<select name="bloodgroup" id="bloodgroup" class="form-control1">
+										<option value="" disabled="" selected>Blood Group</option>
+										<option value="A+">A+</option>
+										<option value="A-">A-</option>
+										<option value="B+">B+</option>
+										<option value="B-">B-</option>
+										<option value="AB+">AB+</option>
+										<option value="AB-">AB-</option>
+										<option value="O+">O+</option>
+										<option value="O-">O-</option>
+										
+									
+									</select>
+									
 								</div>
 							</div>
 
@@ -143,15 +160,16 @@
 						
 
 						<div class="col-md-12">
-							<label for="">Photo</label>
+							
 							<div class="form-group">
 								<input name="expiration" type="hidden" required class="form-control1"  autocomplete="off" value="<?php echo date('Y/m/d', strtotime('+15 days'));?>" />
-								<samp><input name="photo" type="file"  class="form-control1" id="f" onchange="ValidateSingleInput(this);" accept=".PNG" required="" /></samp>
+								<samp><input name="photo" type="file"  class="form-control1" id="f" onchange="ValidateSingleInput(this);" accept=".PNG" required /></samp>
 							</div>
 						</div>
 								
 					</div>
-				</div>
+					</div>
+			
 				<div class="panel-footer"> <center>
 					<button type="reset"class="btn btn-danger" value="Reset">Reset</button>
 					<button type="submit" name="sign_up" class="btn btn-success" onclick="return confirm('Are you sure you want to Process this ?');"> <i class="fa fa-refresh" aria-hidden="true"></i> Submit</button>

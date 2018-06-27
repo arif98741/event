@@ -60,8 +60,8 @@ class Dashboard {
         $starting = date('Y-m-d ')."00:00:00";
         $ending = date('Y-m-d ')."23:59:59";
 
-        $query = "SELECT * FROM registration where status='approved' and date between '$starting' and '$ending'";
-        $stmt = $this->dbObj->link->query($query) or die($this->dbObj->link->error)." ".__LINE__;
+        $query = "SELECT * FROM `registration` where status='approved' and date between '$starting' and '$ending'";
+        $stmt = $this->dbObj->link->query($query);
         if ($stmt) {
             return $stmt->num_rows;
         }else{

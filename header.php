@@ -86,10 +86,12 @@ $man = new Manage();
 
 	     <ul class="nav navbar-nav pull-right">
 	        <li><a href="index.php"><i class="fa fa-home">&nbsp;</i>Home</a></li>
+			        <li><a href="rules.php?action=view&name=history&loc=home">Rules</a></li>
 	        <li><a href="registration.php">Registration</a></li>
-	        <li><a href="rules.php?action=view&name=history&loc=home">Rules</a></li>
+	
+			   <li><a href="payment.php">Payment</a></li>
 	         <li><a href="invitationcard.php">Invitation Card</a></li>
-	        <li><a href="payment.php">Payment</a></li>
+	     
 	        <li><a href="committee.php">Committee</a></li>
 	        <li><a href="newsandevent.php">News & Events</a></li>
 	        <li><a href="contact.php">Contact</a></li>

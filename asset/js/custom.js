@@ -11,6 +11,14 @@ $(document).ready(function() {
 			});
 			$('#no_of_member_in_family').val('');
 			
+		}else if(value === 'Ex Student(Abroad)'){
+			
+			$('#no_of_member_in_family').val('');
+			$('#no_of_member_in_family').attr({
+				disabled: ""
+			});
+			
+			$('#amount').val(800);
 		}else{
 			type = 700;
 			$('#no_of_member_in_family').val('');

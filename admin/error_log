@@ -1,0 +1,38 @@
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/hndecgs/public_html/admin/classes/DB.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/hndecgs/public_html/admin/classes/Dashboard.php on line 26
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/hndecgs/public_html/admin/classes/Dashboard.php on line 44
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/hndecgs/public_html/admin/classes/Dashboard.php on line 64
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/hndecgs/public_html/admin/classes/Dashboard.php on line 80
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/hndecgs/public_html/admin/classes/Dashboard.php on line 100
+[01-Jun-2018 08:12:18 Asia/Dhaka] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/hndecgs/public_html/admin/classes/Dashboard.php on line 116
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 55
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 56
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 69
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 70
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 71
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 72
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 73
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 74
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 75
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 76
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 77
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 80
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 80
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 89
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 90
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 91
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 96
+[03-Jun-2018 07:33:04 Asia/Dhaka] PHP Notice:  Undefined variable: registant_data in /home/hndecgs/public_html/admin/viewregistant.php on line 101

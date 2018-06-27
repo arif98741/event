@@ -5,6 +5,12 @@ password: explore+88
 database: hndecgs_db
 
 
+public $link;
+    private $username = 'hndecgs_user';
+    private $password = 'explore+88';
+    private $host = 'localhost';
+    private $database = 'hndecgs_db';
+
 >>ftp account
 host: ftp@100.cgsacollege.edu.bd	
 username : hndecgs

@@ -5,13 +5,12 @@
 	$help = new Helper();
 	if (isset($_GET['action']) && isset($_GET['registrationid'])) {
 		$registrationid = $help->validAndEscape($_GET['registrationid']);
-		$query = "select * from registration  where id='$registrationid'  limit 1";
+		$query = "select * from registration join ledger on registration.id = ledger.registant_id  where registration.id='$registrationid'  limit 1";
 		$stmt = $db->link->query($query) or die($db->link->error)." error at line number ".__LINE__;
 		if ($stmt) {
 			if ($stmt->num_rows > 0) {
 				$registant_data = $stmt->fetch_assoc();
 			}
-			
 		} 
 	}
  ?>
@@ -19,7 +18,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Confirmation Card- CGSA & Registration ID -<?php echo $id; ?></title>
+	<title>Invitation Card- CGSA & Registration ID -<?php echo $id; ?></title>
 	<style>
 		a{
 			text-decoration: none;
@@ -32,6 +31,12 @@
 		    border-radius: 3px;
 		    display: block;
 		    text-align: center;
+		}
+		.registration_id{
+			border: 2px solid #000;
+		    padding: 7px 47px;
+		    font-weight: 1014;
+		    font-size: 20px;
 		}
 		body{
 			background: #7c908d;
@@ -54,16 +59,16 @@
 			 width: 40%;
 			 padding: 6px;
 			 margin: 0 auto;
-			 margin-bottom: 20px;
+			 margin-top: 75px;
 		}
 
 		.header .ex-student{
 			 text-align: center; 
-			 border: 1px solid #000;
+			 /*border: 1px solid #000;*/
 			 width: 30%;
 			 padding: 5px;
 			 margin: 0 auto;
-			 margin-top: 100px;
+			 margin-top: 20px;
 		}
 
 
@@ -72,11 +77,11 @@
 		}
 		.header .logo img{
 			width: 60px; height: 60px;
-			margin-left: 330px;
+			margin-left: 280px;
 		}
 		.header .logo-content{
 			float: right;
-			margin-right: 320px;
+			margin-right: 290px;
 		}
 		.header .logo-content h3, .header .logo-content h4{
 			margin: 0px;
@@ -90,18 +95,22 @@
 			padding: 25px;
 			width: 90%;
 			margin: 0 auto;
-			border: 1px solid #000;
+			min-height: 85px;
+			
 		}
 		.content .id-header .reg-id{
 			float: left;
+			
 
 		}
-		.content .id-header .date{
+		.content .id-header .partipant_photo{
 			float: right;
 		}
 
-		.content .id-header h4{
+		.content .id-header img{
 			margin: 0px;
+			width: 120px;
+			height: 120px;
 		}
 
 		.information{
@@ -134,8 +143,9 @@
 		    margin: 0px auto;
 		    margin-top: 40px;
 		}
-		.instructions ol{
-			
+		.instructions ul{
+			list-style: none;
+			line-height: 30px;
 		}
 		.instructions ol li{
 			line-height: 25px;
@@ -147,24 +157,26 @@
 
 	<div class="wrapper">
 		<div class="header">
-			<h1>INVITATION CARD</h1>
+			
 			<div class="logo">
 				<img src="photo/logo.jpg" alt="">
 			</div>
 			<div class="logo-content">
 				<h3>75 Years Celebration 2018</h3>
-				<h4>Chowmuhani Govt. College</h4>
+				<h4>Chowmuhani Govt. SA College, Noakhali</h4>
 			</div>
+			<h1>INVITATION CARD</h1>
 
 			<h3 class="ex-student">Ex-Student</h3>
 		</div>
 		<div class="content">
 			<div class="id-header">
 				<div class="reg-id">
-					<h4>Registration ID: <?php echo $registant_data['id']; ?></h4>
+					<span>Registration ID: <span class="registration_id"><strong><?php echo $registant_data['id']; ?></strong><span></span>
 				</div>
-				<div class="date">
-					<h4>Date: 12-03-1997</h4>
+				<div class="partipant_photo">
+					
+					<img src="photo/<?php echo $registant_data['photo']; ?>">
 				</div>
 			</div>
 
@@ -172,26 +184,28 @@
 			<div class="information">
 				<h3>Personal Information</h3>
 				<hr>
-				<p>Name: <?php echo $registant_data['fullname']; ?></p>
+				<p>Participant's Name: <?php echo $registant_data['fullname']; ?></p>
 				<hr>
-				<p>Father's Name: <?php echo $registant_data['father']; ?></p>
+				<p>Number of Participants with Family: <?php echo 1 + $registant_data['no_of_family_member']; ?></p>
 				<hr>
-				<p>Academic Degree: <?php echo $registant_data['academic']; ?></p>
+				<p>Academic Class: <?php echo $registant_data['academic']; ?></p>
 				<hr>
 				<p>First Admission Year: <?php echo $registant_data['batchyear']; ?></p>
 				<hr>
-				<p>Mobile Number: <?php echo $registant_data['contact']; ?></p>
+				<p>Amount Paid: <?php echo $registant_data['amount']; ?></p>
 			</div>
 		</div>
 		<div class="footer">
 			<div class="instructions">
-				<h3>Instructions</h3>
-				<ol>
-					<li>Something</li>
-					<li>Traffic Control System Maintances</li>
-					<li>Better Idea and Study</li>
-					<li>Better Idea and Study</li>
-				</ol>
+				<h3>নির্দেশাবলী</h3>
+				<ul>
+					<li>১। ইনভাইটেশন কার্ড প্রদর্শন পূর্বক অনুষ্ঠানস্থলে প্রবেশ করতে পারবেন</li>
+					<li>২।  অনুষ্ঠানস্থলে প্রবেশের পর আপনার জন্য নির্ধারিত কাউন্টার হতে  সকাল  ৯টা হতে ১১টার মধ্যে ইনভাইটেশন কার্ড প্রদর্শন করে
+উপহার সামগ্রী, খাবারের কুপণ ও মূল প্যান্ডেলে প্রবেশের জন্য আইডি কার্ড সংগ্রহ করতে পারবেন।</li>
+					<li>৩।  ৭৫ বছর পূর্তি উৎসবে অংশগ্রহণকারী সকলকে সকাল ১১টার মধ্যে সরবরাহকৃত ID কার্ড গলায় ঝুলিয়ে অবশ্যই অনুষ্ঠানের 
+মূল প্যান্ডেলে প্রবেশ করার জন্য অনুরোধ করা হলো। এখানে উল্লেখ্য যে, মূল প্যান্ডেলে প্রবেশে নিরাপত্তা তল্লাশী সুষ্ঠুভাবে সম্পাদনের সুবিধার্থে অংশগ্রহণকারী সকলকে সারিবদ্ধ ভাবে প্যান্ডেলে প্রবেশ করার জন্য বিশেষভাবে অনুরোধ করা হলো।</li>
+					<li>৪। এই অনুষ্ঠানে কোন ধরনের অস্ত্র বহন করা যাবেনা, ধুপমান সম্পূর্ণ নিষিদ্ধ বিধায় কেউ অনুষ্ঠানস্থলে ধুপমান সামগ্রী নিয়ে প্রবেশ করবেন না।</li>
+				</ul>
 			</div>
 		</div>
 	</div>

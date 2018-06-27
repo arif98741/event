@@ -21,9 +21,12 @@ class Manage {
 
     public function addRegistant($data) {
         date_default_timezone_set('Asia/Dhaka');
-       
+        
         $registration_type = $this->helpObj->validAndEscape($data['registration_type']);
-        $fullname = $this->helpObj->validAndEscape($data['fullname']);
+
+        $registration_id = $this->manageRegistrationID($registration_type); //this is generating from function according to rules.
+
+        $fullname = $this->helpObj->validAndEscape(ucfirst($data['fullname']));
         $fullnameinbangla = $this->helpObj->validAndEscape($data['fullnameinbangla']);
         $dob = $this->helpObj->validAndEscape($data['dob']);
         $gender = $this->helpObj->validAndEscape($data['gender']);
@@ -34,7 +37,13 @@ class Manage {
         $batchyear = $this->helpObj->validAndEscape($data['batchyear']);
         $academic = $this->helpObj->validAndEscape($data['academic']);
         $occupation = $this->helpObj->validAndEscape($data['occupation']);
-        $no_of_family_member = $this->helpObj->validAndEscape($data['no_of_family_member']);
+
+        if (!isset($data['no_of_family_member'])) { //as there is a disabled attribute in html form for onchange event
+            $no_of_family_member = 0;
+        } else if(isset($data['no_of_family_member'])) {
+            $no_of_family_member = $this->helpObj->validAndEscape($data['no_of_family_member']);
+        }
+
         $date = date('Y-m-d h:i:s');
 
         $photo  =  'photo' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.jpg';
@@ -45,13 +54,13 @@ class Manage {
             $row = $checkstmt->num_rows;
             if($row > 0){
                 return "<col-md-12 width='100%'><span class='alert alert-warning'>You have already registered on <strong>Celebration 75 years - CGSA COLLEGE</strong>.</span></div>";
-            }else{
-                $query = "insert into registration(registration_type,
+            }else{ 
+                $query = "insert into registration(id,registration_type,
                 fullname,fullnameinbangla,dob,gender,father,contact,address,email,batchyear,academic,
                 occupation,photo,no_of_family_member, date
-                ) values('$registration_type','$fullname','$fullnameinbangla','$dob','$gender','$father','$contact','$address','$email','$batchyear','$academic','$occupation','$photo','$no_of_family_member', '$date')";
+                ) values('$registration_id','$registration_type','$fullname','$fullnameinbangla','$dob','$gender','$father','$contact','$address','$email','$batchyear','$academic','$occupation','$photo','$no_of_family_member', '$date')";
 
-                $stmt = $this->dbObj->insert($query);
+                $stmt = $this->dbObj->link->query($query) or die($this->dbObj->link->error)."at line number ".__LINE__;
                 if ($stmt) {
                     move_uploaded_file($_FILES["photo"]["tmp_name"], "photo/".$photo);
 
@@ -61,7 +70,7 @@ class Manage {
                         $registant_id = $checkstmt->fetch_object()->id;
                         $data['registant_id'] = $registant_id;
                         $this->sendMessageConfirmation($fullname,$contact); //send sms confirmation
-                        $status = $this->addPayment($data);
+                        $status = $this->addPayment($registration_id, $data['amount']);
                     }
 
                     $stmt = $this->dbObj->link->query("select * from registration order by id desc limit 1") or die($db->link->error)." at line number ".__LINE__;
@@ -69,7 +78,6 @@ class Manage {
                         $data = $stmt->fetch_assoc();
                         $id = $data['id'];
                         $contact = $data['contact'];
-
                         header("location: confirmcard.php?action=preview&rid=".$id);
                         
                     }
@@ -83,32 +91,69 @@ class Manage {
         
     }
 
+    /*
+    @ manage id for registration
+    @ for ex-student 4001-8000
+    @ for regular student 8001-rest
+    */
+    function manageRegistrationID($type)
+    {
+        $id = '';
+
+        if ($type == "Ex Student" || $type == "Ex Student(Abroad)") {
+            $checkquery = "SELECT * from registration WHERE registration_type='Ex Student(Abroad)' or registration_type='Ex Student' ORDER by id DESC limit 1";
+            $checkstmt = $this->dbObj->link->query($checkquery);
+            if ($checkstmt) {
+                $data = $checkstmt->fetch_assoc();
+                $row = $checkstmt->num_rows;
+                if ($row > 0) {
+
+                    $id = $data['id'];
+                    $id = $id + 1;
+                    
+                } else {
+                    $id = 4001;
+                }
+            }
+        } else if($type == "Current Student") {
+            $checkquery = "SELECT * from registration WHERE registration_type='Current Student' ORDER by id DESC limit 1";
+            $checkstmt = $this->dbObj->link->query($checkquery);
+            if ($checkstmt) {
+                $data = $checkstmt->fetch_assoc();
+                $row = $checkstmt->num_rows;
+                if ($row > 0) {
+
+                    $id = $data['id'];
+                    $id = $id +1;
+                   
+                } else {
+                    $id = 8001;
+                    
+                }
+            }
+        }
+
+        return $id;
+       
+    }
+
+
 
     /*
     @ add payment in payment.php
     @ action index.php
     @method post
     */
-    function addPayment($data)
+    function addPayment($registration_id,$amount)
     {
-        $registant_id = $this->helpObj->validAndEscape($data['registant_id']);
-        $method = $this->helpObj->validAndEscape($data['method']);
-        $amount = $this->helpObj->validAndEscape($data['amount']);
-        $transaction_id = $this->helpObj->validAndEscape($data['transaction_id']);
-
-        $checkquery = "select * from ledger where method='$method' and transaction_id='$transaction_id'";
-        $checkstmt = $this->dbObj->link->query($checkquery);
-        if ($checkstmt) {
-           
-            $query = "insert into ledger(registant_id,amount) 
-            values('$registant_id','$amount')";
-            $stmt = $this->dbObj->link->query($query)  or die($db->link->error)." at line number ".__LINE__;;
-            if ($stmt) {
-                return  true;
-            }else{
-               return false;
-            }
-            
+       
+        $query = "insert into ledger(registant_id,amount) 
+        values('$registration_id','$amount')";
+        $stmt = $this->dbObj->link->query($query)  or die($db->link->error)." at line number ".__LINE__;;
+        if ($stmt) {
+            return  true;
+        }else{
+           return false;
         }
 
     }
@@ -175,7 +220,7 @@ class Manage {
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        echo $smsresult = curl_exec($ch); //execute statement to send sms
+        $smsresult = curl_exec($ch); //execute statement to send sms
 
     }
 

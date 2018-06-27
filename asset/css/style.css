@@ -1,13 +1,13 @@
 
 h4, h5, h6,
-h1, h2, h3 {margin-top: 0;color: #8BC34A;}
+h1, h2, h3 {margin-top: 0;color: #1A237E;}
 ul, ol {margin: 0;}
 p {margin: 0;}
 
 html, body{
     font-size: 16px;
-  	overflow-x: hidden;
-	background: #f9f9f9;
+    overflow-x: hidden;
+    background: #FFFDE7;
 }
 .h3, h3 {
     font-size: 20px;
@@ -21,8 +21,8 @@ html, body{
 }
 
 .navbar-default {
-    background-color: #673AB7;
-    border-color: #673AB7;
+    background-color: #F44336;
+    border-color: #B71C1C;
 }
 label {
     display: inline-block;
@@ -37,6 +37,7 @@ label {
 .navbar-default .navbar-nav>li>a {
     color: #fff;
 }
+marquee {background: #B71C1C;margin-top: -140px;padding: 8px;color: #FFEB3B;}
 body a{
 	transition:0.5s all;
 	-webkit-transition:0.5s all;

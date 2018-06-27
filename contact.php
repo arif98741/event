@@ -12,7 +12,7 @@
 	
 		
 		
-		<div class="col-md-offset-2 col-md-8">
+		<div class= "col-md-12">
 			<!-- /.box-header -->
 			<div style="background:#fff; padding:20px;box-shadow:0 1px 1px 0px #EFEFEF; class="table-container">
 				<h3 class="box-title" style="text-align: center;"><i class="fa fa-envelope" aria-hidden="true"></i> CONTACT<hr></h3>
