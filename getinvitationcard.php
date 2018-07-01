@@ -12,13 +12,15 @@
 				$registant_data = $stmt->fetch_assoc();
 			}
 		} 
+	}else{
+		header("location: index.php");
 	}
  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Invitation Card- CGSA & Registration ID -<?php echo $id; ?></title>
+	<title>Invitation Card- CGSA & Registration ID -<?php echo $registant_data['registant_id']; ?></title>
 	<style>
 		a{
 			text-decoration: none;

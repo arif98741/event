@@ -89,7 +89,7 @@ $man = new Manage();
 			        <li><a href="rules.php?action=view&name=history&loc=home">Rules</a></li>
 	        <li><a href="registration.php">Registration</a></li>
 	
-			   <li><a href="payment.php">Payment</a></li>
+			  <!--  <li><a href="payment.php">Payment</a></li> -->
 	         <li><a href="invitationcard.php">Invitation Card</a></li>
 	     
 	        <li><a href="committee.php">Committee</a></li>

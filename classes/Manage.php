@@ -47,14 +47,18 @@ class Manage {
         $date = date('Y-m-d h:i:s');
 
         $photo  =  'photo' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.jpg';
+        $file_size = $_FILES['photo']['size'];
         $msg = '';
 
         $checkstmt = $this->dbObj->link->query("SELECT * from registration where fullname='$fullname' and registration_type='$registration_type' and  contact='$contact'") or die($this->dbObj->link->error);
         if ($checkstmt) {
             $row = $checkstmt->num_rows;
             if($row > 0){
-                return "<col-md-12 width='100%'><span class='alert alert-warning'>You have already registered on <strong>Celebration 75 years - CGSA COLLEGE</strong>.</span></div>";
-            }else{ 
+                return "<div style='background:#fff; width:95%; display: inline-block; color: red; padding:20px;box-shadow:0 1px 1px 0px #ccc; margin-right: 30px !important;' class='table-container' id='errormessage'> Error! Registant Already Exist</div>";
+
+            }elseif ($file_size > 409600) {
+                return "<div style='background:#fff; width:95%; display: inline-block; color: red; padding:20px;box-shadow:0 1px 1px 0px #ccc; margin-right: 30px !important;' class='table-container' id='errormessage'> Error! Image should be less than 400KB</div>";
+            } else{ 
                 $query = "insert into registration(id,registration_type,
                 fullname,fullnameinbangla,dob,gender,father,contact,address,email,batchyear,academic,
                 occupation,photo,no_of_family_member, date
@@ -69,7 +73,7 @@ class Manage {
                     if ($checkstmt) {
                         $registant_id = $checkstmt->fetch_object()->id;
                         $data['registant_id'] = $registant_id;
-                        $this->sendMessageConfirmation($fullname,$contact); //send sms confirmation
+                        $this->sendMessageConfirmation($fullname,$contact,$registration_id,$data['amount']); //send sms confirmation
                         $status = $this->addPayment($registration_id, $data['amount']);
                     }
 
@@ -78,7 +82,7 @@ class Manage {
                         $data = $stmt->fetch_assoc();
                         $id = $data['id'];
                         $contact = $data['contact'];
-                        header("location: confirmcard.php?action=preview&rid=".$id);
+                        header("location: confirmcard.php?action=preview&rid=".$registration_id);
                         
                     }
                    
@@ -202,10 +206,12 @@ class Manage {
     @ send confirmation sms to registants
     @ 
     */
-    function sendMessageConfirmation($fullname,$contact)
+    function sendMessageConfirmation($fullname,$contact,$registration_id,$amount)
     {
 
-        $message = "Dear ".$fullname.", your registration to '75 Years Celebration - CGSA College' has successfully completed. For details visit http://75.cgsacollege.edu.bd/";
+        /*$message = "Dear ".$fullname.", your registration to '75 Years Celebration - CGSA College' has successfully completed. For details visit http://75.cgsacollege.edu.bd/";*/
+        $message = "Dear ".$fullname.", we accepted your registration. Your ID is ".$registration_id.". Please pay your registration fee TK ".$amount."/- for collecting invitation card. CGSA College";
+        
 
         $token = "77f9a4d2c5ea51913e1cd7624705239c";
         $url = "http://sms.greenweb.com.bd/api.php";

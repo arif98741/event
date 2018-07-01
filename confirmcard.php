@@ -76,7 +76,7 @@
 	    </table>
 	  </div>
 		<div class="main">
-		  <p style="max-width: 685px; margin: 0 auto;">Congratulations! We have successfully received your registration. Your Registration ID is  <strong><?php  echo $registant_data['id']; ?></strong>. Please pay the amount <strong>tk<?php echo $registant_data['amount']; ?></strong> by mobile banking system- Rocket for collecting you invitation card.<br><br></p>
+		  <p style="max-width: 685px; margin: 0 auto;">Congratulations! We have successfully received your registration. Your Registration ID is  <strong><?php  echo $registant_data['id']; ?></strong>.<br> Please pay the amount <strong>TK. <?php echo round($registant_data['amount']); ?>/-</strong> by mobile banking system- Rocket for collecting you invitation card.<br><br></p>
 		  
           <table width="100%" border="0">
             <tr>
@@ -137,7 +137,13 @@
 						<td width="19%" align="left" nowrap>Email</td>
 						<td width="5%" nowrap>:</td>
 						<td width="56%" align="left" nowrap><strong>
-					    <?php  echo $registant_data['email']; ?>
+					    <?php  
+					   	 if (!empty($registant_data['email'] )) {
+					   	 	$registant_data['email']; 
+					   	 } else {
+					   	 	echo ' - ';
+					   	 }
+					    ?>
 						</strong></td>
 						
 					</tr>
@@ -207,8 +213,12 @@
 					
 			</table>
 		</div>
-		<div class="footer" style="margin-top: 30px; margin-left: 4px;">
+		<div class="footer" style="margin-top: 30px;">
 			<p style="text-align:center;">বিঃ দ্রঃ Registration ID ব্যবহার করে Rocket এর মাধ্যমে আপনার ফি পরিশোধ করুন । Registration ID ও টাকা পরিশোধ করার পর প্রাপ্ত  Transaction ID ব্যবহার করে Invitation Card সংগ্রহ করুন। Invitation Card ছাড়া কেউ অনুষ্ঠানস্থলে প্রবেশ করতে পারবে না। </p>
+			<br>
+			<hr>
+			<br>
+			<p>রেজিট্রেশন ফি পেমেন্ট পদ্ধতিঃ</p>
 		</div>
 	</div>
 </body>

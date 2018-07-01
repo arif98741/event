@@ -67,6 +67,8 @@
               <h3>Registant Details</h3>
               <hr>
               <h4><strong>Name:</strong> <?php echo $registant_data['fullname'];?></h4>
+              <h4><strong>Fullname in Bengali:</strong> <?php echo $registant_data['fullnameinbangla'];?></h4>
+              
               <h4><strong>Batch:</strong> <?php echo $registant_data['batchyear'];?></h4>
               <h4><strong>Gender:</strong> <?php echo strtoupper($registant_data['gender']);?></h4>
               <h4><strong>Contact:</strong> <?php echo $registant_data['contact'];?></h4>
