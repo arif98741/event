@@ -79,11 +79,13 @@
               <h4><strong>Registration Type:</strong> <?php echo $registant_data['registration_type'];?></h4>
               <h4><strong>Registration Fee:</strong>
                <?php
-                if ($registant_data['registration_type'] === 'Former Student' || $registant_data['registration_type'] === 'Running Student') {
-                      echo "300";
-                    }else{
-                       echo "700";
-                  }
+                if ($registant_data['registration_type'] === 'Ex Student' ) {
+                      echo "700";
+                }else if($registant_data['registration_type'] === 'Ex Student(Abroad)' ){
+                       echo "800";
+                }else if($registant_data['registration_type'] === 'Current Student' ){
+                       echo "300";
+                }
                ?>
              </h4>
 

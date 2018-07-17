@@ -14,11 +14,6 @@
 		
 		<div class="col-md-12">
 			
-				
-			
-			<h2><?php echo $data['title']; ?></h2>
-			<hr>
-			
 			<article>
 				<?php
 					echo html_entity_decode($data['description']);

@@ -50,48 +50,41 @@ class Manage {
         $file_size = $_FILES['photo']['size'];
         $msg = '';
 
-        $checkstmt = $this->dbObj->link->query("SELECT * from registration where fullname='$fullname' and registration_type='$registration_type' and  contact='$contact'") or die($this->dbObj->link->error);
-        if ($checkstmt) {
-            $row = $checkstmt->num_rows;
-            if($row > 0){
-                return "<div style='background:#fff; width:95%; display: inline-block; color: red; padding:20px;box-shadow:0 1px 1px 0px #ccc; margin-right: 30px !important;' class='table-container' id='errormessage'> Error! Registant Already Exist</div>";
-
-            }elseif ($file_size > 409600) {
+        
+        if ($file_size > 409600) {
                 return "<div style='background:#fff; width:95%; display: inline-block; color: red; padding:20px;box-shadow:0 1px 1px 0px #ccc; margin-right: 30px !important;' class='table-container' id='errormessage'> Error! Image should be less than 400KB</div>";
-            } else{ 
-                $query = "insert into registration(id,registration_type,
-                fullname,fullnameinbangla,dob,gender,father,contact,address,email,batchyear,academic,
-                occupation,photo,no_of_family_member, date
-                ) values('$registration_id','$registration_type','$fullname','$fullnameinbangla','$dob','$gender','$father','$contact','$address','$email','$batchyear','$academic','$occupation','$photo','$no_of_family_member', '$date')";
+        } else{ 
+            $query = "insert into registration(id,registration_type,
+            fullname,fullnameinbangla,dob,gender,father,contact,address,email,batchyear,academic,
+            occupation,photo,no_of_family_member, date
+            ) values('$registration_id','$registration_type','$fullname','$fullnameinbangla','$dob','$gender','$father','$contact','$address','$email','$batchyear','$academic','$occupation','$photo','$no_of_family_member', '$date')";
 
-                $stmt = $this->dbObj->link->query($query) or die($this->dbObj->link->error)."at line number ".__LINE__;
-                if ($stmt) {
-                    move_uploaded_file($_FILES["photo"]["tmp_name"], "photo/".$photo);
+            $stmt = $this->dbObj->link->query($query) or die($this->dbObj->link->error)."at line number ".__LINE__;
+            if ($stmt) {
+                move_uploaded_file($_FILES["photo"]["tmp_name"], "photo/".$photo);
 
-                    $checkstmt = $this->dbObj->link->query("SELECT * from registration where email='$email'");
-                    $registant_id = ''; //get registant id for payment for  payment after complete registrtion
-                    if ($checkstmt) {
-                        $registant_id = $checkstmt->fetch_object()->id;
-                        $data['registant_id'] = $registant_id;
-                        $this->sendMessageConfirmation($fullname,$contact,$registration_id,$data['amount']); //send sms confirmation
-                        $status = $this->addPayment($registration_id, $data['amount']);
-                    }
-
-                    $stmt = $this->dbObj->link->query("select * from registration order by id desc limit 1") or die($db->link->error)." at line number ".__LINE__;
-                    if ($stmt) {
-                        $data = $stmt->fetch_assoc();
-                        $id = $data['id'];
-                        $contact = $data['contact'];
-                        header("location: confirmcard.php?action=preview&rid=".$registration_id);
-                        
-                    }
-                   
-                } else {
-                    return "<span class='alert alert-warning'>Failed! Unknown Error. Please Contact Support</span>";
+                $checkstmt = $this->dbObj->link->query("SELECT * from registration where email='$email'");
+                $registant_id = ''; //get registant id for payment for  payment after complete registrtion
+                if ($checkstmt) {
+                    $registant_id = $checkstmt->fetch_object()->id;
+                    $data['registant_id'] = $registant_id;
+                    $this->sendMessageConfirmation($fullname,$contact,$registration_id,$data['amount']); //send sms confirmation
+                    $status = $this->addPayment($registration_id, $data['amount']);
                 }
+
+                $stmt = $this->dbObj->link->query("select * from registration order by id desc limit 1") or die($db->link->error)." at line number ".__LINE__;
+                if ($stmt) {
+                    $data = $stmt->fetch_assoc();
+                    $id = $data['id'];
+                    $contact = $data['contact'];
+                    header("location: confirmcard.php?action=preview&rid=".$registration_id);
+                    
+                }
+               
+            } else {
+                return "<span class='alert alert-warning'>Failed! Unknown Error. Please Contact Support</span>";
             }
         }
-
         
     }
 
@@ -128,7 +121,7 @@ class Manage {
                 if ($row > 0) {
 
                     $id = $data['id'];
-                    $id = $id +1;
+                    $id = $id + 1;
                    
                 } else {
                     $id = 8001;
