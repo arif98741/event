@@ -154,7 +154,7 @@
 
 						<div class="col-md-4">
 							<div class="form-group">
-								<input name="amount" type="number" id="amount" class="form-control1"    placeholder="Amount"  readonly="" />
+								<input name="amount" type="number" id="amount" class="form-control1"    placeholder="Amount"   />
 
 							</div>
 						</div>

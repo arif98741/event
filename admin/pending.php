@@ -11,6 +11,20 @@
 
   }
 ?>
+<?php 
+
+  if(isset($_GET['action'] ) && $_GET['action'] ='delete'){
+    $id = $help->validAndEscape($_GET['id']);
+    $stmt = $db->link->query("delete from ledger where registant_id='$id'");
+    $stmt = $db->link->query("delete from registration where id='$id'");
+    if ($stmt) {
+      header('Location: approved.php');
+    }else{
+      echo "false";
+    }
+  }
+
+?>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -76,8 +90,8 @@
                         
                     </td>
                     <td>
-                      <a href="#" class="btn btn-warning" disabled><i class="fa fa-refresh"></i></a>
-                      <a href="viewregistant.php?duty=view&id=<?php  echo $row->id; ?>" class="btn btn-danger"><i class="fa fa-eye"></i></a>
+                      <a href="?action=delete&id=<?php  echo $row->id; ?>" class="btn btn-danger" onclick="return confirm('are you sure to delete?')" ><i class="fa fa-trash"></i></a>
+                      <a href="viewregistant.php?duty=view&id=<?php  echo $row->id; ?>" class="btn btn-warning"><i class="fa fa-eye"></i></a>
                       <a href="?action=activate&id=<?php  echo $row->id; ?>" class="btn btn-primary" onclick="return confirm('are you sure to activate?')" ><i class="fa fa-check"></i></a>
                     </td>
 
